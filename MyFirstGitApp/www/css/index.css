@@ -59,6 +59,22 @@ body {
                                    /* offset horizontal: half of text area width */
 }
 
+.head {
+    background-color:#fed066;
+    color: #000;
+    height: 10%;
+    width: 100%; 
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.category {
+    height: 30%;
+    width: 100%; 
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size: 24px;
+}
+
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
