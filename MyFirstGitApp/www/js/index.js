@@ -47,3 +47,9 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function changepage(page){
+
+    $.mobile.changePage( page, { transition: "slide", changeHash: false });
+
+}
