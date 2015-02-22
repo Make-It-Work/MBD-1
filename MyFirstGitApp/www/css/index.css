@@ -43,6 +43,7 @@ body {
     padding:0px;
     text-transform:uppercase;
     width:100%;
+    position: absolute;
 }
 
 /* Portrait layout (default) */
@@ -73,6 +74,13 @@ body {
     width:100%; 
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
     font-size:24px;
+    clear:both;
+}
+.category-icon {
+    float: left;
+}
+.category-text {
+    float: right;
 }
 
 /* Landscape layout (with min-width) */
