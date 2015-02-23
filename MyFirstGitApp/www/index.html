@@ -76,7 +76,8 @@
              </div>
 
              <div data-role="main" class="ui-content">
-                <p>Pick a movie</p>
+                <ul data-role="listview" data-autodividers="true" id="movie-list">
+                </ul>
             </div>
         </div>
         <div data-role="page" id="series">
@@ -85,7 +86,8 @@
             </div>
 
             <div data-role="main" class="ui-content">
-                <p>Pick a serie</p>
+                <ul data-role="listview" data-autodividers="true" id="serie-list">
+                </ul>
             </div>
         </div>
         <div data-role="page" id="cartoons">
@@ -94,13 +96,76 @@
             </div>
 
             <div data-role="main" class="ui-content">
-                <p>Pick a cartoon</p>
+                <ul data-role="listview" data-autodividers="true" id="cartoon-list">
+                </ul>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
+        </script>
+        <script>
+            var movies = {
+                "movie1": {
+                    "title": "Harry Potter and the Philosopher's stone",
+                    "year": "2002",
+                    "country": "England"
+                },
+                "movie2": {
+                    "title": "Harry Potter and the Chamber of Secrets",
+                    "year": "2004",
+                    "country": "England"
+                },
+                "movie3": {
+                    "title": "Harry Potter and the Prisoner of Azkaban",
+                    "year": "2005",
+                    "country": "England"
+                }
+            };
+            $.each(movies, function(key, value) {
+                $("#movie-list").append("<li>" + value['title'] + "</li>")
+            });
+            var series = {
+                "serie1": {
+                    "title": "Dance Moms",
+                    "status": "running",
+                    "seasons": "5"
+                },
+                "serie2": {
+                    "title": "Make It Or Break It",
+                    "status": "cancelled",
+                    "seasons": "4"
+                },
+                "serie3": {
+                    "title": "Glee",
+                    "status": "running",
+                    "seasons": "6"
+                }
+            };
+            $.each(series, function(key, value) {
+                $("#serie-list").append("<li>" + value['title'] + "</li>")
+            });
+            var cartoons = {
+                "cartoon1": {
+                    "title": "Spongebob Squarepants",
+                    "network": "nickelodeon",
+                    "description": "Describes the life of a sponge who lives in a pineapple"
+                },
+                "cartoon2": {
+                    "title": "Lucky Luke",
+                    "network": "ketnet",
+                    "country": "Describes the life of a cowboy"
+                },
+                "cartoon3": {
+                    "title": "Southpark",
+                    "network": "Cartoon Network",
+                    "country": "Revolves around 4 weird friends"
+                }
+            };
+            $.each(cartoons, function(key, value) {
+                $("#cartoon-list").append("<li>" + value['title'] + "</li>")
+            });
         </script>
     </body>
 </html>
