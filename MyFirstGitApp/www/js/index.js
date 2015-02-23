@@ -48,8 +48,3 @@ var app = {
     }
 };
 
-$('.category').click(function() {
-    var page = $(this).attr('id') + '.html';
-    alert(page);
-    $.mobile.changepage(page, { transition: 'slide'});
-});
