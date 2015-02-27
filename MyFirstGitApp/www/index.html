@@ -100,6 +100,33 @@
                 </ul>
             </div>
         </div>
+
+        <div data-role="page" id="details">
+            <div data-role="header">
+                <h1>NachoTime</h1>
+             </div>
+
+             <div data-role="main" class="ui-content">
+                <table data-role="table" data-mode="columntoggle" class="ui-responsive" id="detailsTable">
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="text-align: center" id="title"> XXX </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr> 
+                            <td id='key1'> Key2 </td>
+                            <td id='value1'> Value2 </td>
+                        </tr>
+                        <tr> 
+                            <td id="key2"> Key3 </td>
+                            <td id='value2'> Value3 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
@@ -124,7 +151,7 @@
                 }
             };
             $.each(movies, function(key, value) {
-                $("#movie-list").append("<li>" + value['title'] + "</li>")
+                $("#movie-list").append("<li class='details' id=" + key + "> <a href='#details'>" + value['title'] + "</a> </li>");
             });
             var series = {
                 "serie1": {
@@ -144,7 +171,7 @@
                 }
             };
             $.each(series, function(key, value) {
-                $("#serie-list").append("<li>" + value['title'] + "</li>")
+                $("#serie-list").append("<li class='details' id=" + key + "> <a href='#details'>" + value['title'] + "</a> </li>");
             });
             var cartoons = {
                 "cartoon1": {
@@ -155,17 +182,53 @@
                 "cartoon2": {
                     "title": "Lucky Luke",
                     "network": "ketnet",
-                    "country": "Describes the life of a cowboy"
+                    "description": "Describes the life of a cowboy"
                 },
                 "cartoon3": {
                     "title": "Southpark",
                     "network": "Cartoon Network",
-                    "country": "Revolves around 4 weird friends"
+                    "description": "Revolves around 4 weird friends"
                 }
             };
             $.each(cartoons, function(key, value) {
-                $("#cartoon-list").append("<li>" + value['title'] + "</li>")
+                $("#cartoon-list").append("<li class='details' id=" + key + "> <a href='#details'>" + value['title'] + "</a> </li>");
             });
+            var clicked;
+            function loadDetails(clicked) {
+                var counter = 0;
+                for (key in clicked) {
+                    if (counter === 0) {
+                        $('#title').text(clicked['title']);
+                    } else {
+                        var searchkey = '#key' + counter;
+                        var searchvalue = '#value' + counter;
+                        $(searchkey).text(key);
+                        $(searchvalue).text(clicked[key]);
+                    }
+                    counter++;
+                }
+                
+            };
+
+            $("#cartoon-list").on("click", '.details a', function(e) {
+                var el = e.currentTarget;
+                var id = $(el).parent().attr('id')
+                var clicked = cartoons[id];
+                loadDetails(clicked);
+            });
+            $("#movie-list").on("click", '.details a', function(e) {
+                var el = e.currentTarget;
+                var id = $(el).parent().attr('id')
+                var clicked = movies[id];
+                loadDetails(clicked);
+            });
+            $("#serie-list").on("click", '.details a', function(e) {
+                var el = e.currentTarget;
+                var id = $(el).parent().attr('id')
+                var clicked = series[id];
+                loadDetails(clicked);
+            });
+            
         </script>
     </body>
 </html>
