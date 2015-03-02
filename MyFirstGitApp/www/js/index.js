@@ -47,3 +47,13 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+$( "#user-flip" ).bind( "change", function(event, ui) {
+    window.localStorage.setItem("user", $(this).val());
+    $("#user-setting").text(window.localStorage.getItem("user"));
+});
+$( "#time-flip" ).bind( "change", function(event, ui) {
+    window.localStorage.setItem("time", $(this).val());
+    $("#time-setting").text(window.localStorage.getItem("time"));
+});
+

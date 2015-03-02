@@ -78,6 +78,17 @@ h1 {
     text-align:center;
 }
 
+.head {
+    font-size: 24px;
+    height:55px;
+    clear: both;
+}
+
+.settings {
+    max-height: 40px;
+    max-width: 40px;
+}
+
 .event {
     border-radius:4px;
     -webkit-border-radius:4px;

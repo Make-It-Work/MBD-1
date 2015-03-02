@@ -27,14 +27,48 @@
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <title>Let's get Crackin'</title>
     </head>
     <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Awesome</p>
+        <div data-role="page" id="index">
+            <div data-role="header">
+                <div style="clear: both; height: 55px; width: 100%;">
+                    <span style="float: left; height: 55px;"> <h1>ToDo</h1> </span>
+                    <a href="#settings"><img src="../img/settingsicon.png" alt="settings" style="max-width: 55px; max-height: 55px; float:right"/></a>
+                </div>
+            </div>
+            <div data-role="main" class="ui-content">
+                <h2> Your settings </h2>
+                <table>
+                    <tr>
+                        <td> User: </td> <td id="user-setting">Off</td>
+                    </tr>
+                    <tr>
+                        <td> Time: </td> <td id="time-setting">Off</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div data-role="page" id="settings">
+            <div data-role="header">
+                <div style="clear: both; height: 55px; width: 100%;">
+                    <span style="float: left; height: 55px;"> <h1>ToDo - Settings</h1> </span>
+                </div>
+            </div>
+            <div data-role="main" class-"ui-content">
+                <h2>Toon gebruiker bij todo:</h2>
+                <select name="user-flip" id="user-flip" data-role="slider">
+                    <option value="off">Off</option>
+                    <option value="on">On</option>
+                </select>
+                <h2>Toon tijd bij todo: </h2>
+                <select name="time-flip" id="time-flip" data-role="slider">
+                    <option value="off">Off</option>
+                    <option value="on">On</option>
+                </select>
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
