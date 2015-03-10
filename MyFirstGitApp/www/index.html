@@ -41,21 +41,33 @@
                 </div>
             </div>
             <div data-role="main" class="ui-content">
-                <h2> Your settings </h2>
-                <table>
-                    <tr>
-                        <td> User: </td> <td id="user-setting">Off</td>
-                    </tr>
-                    <tr>
-                        <td> Time: </td> <td id="time-setting">Off</td>
-                    </tr>
+                <h2> Your todos </h2>
+                <table id="results">
+                    <tbody>
+                    </tbody>
                 </table>
+                <a href="#addTodo" id="addlink">Add a new Todo</a>
+            </div>
+        </div>
+        <div data-role="page" id="addTodo">
+            <div data-role="header">
+                <div style="clear: both; height: 55px; width: 100%;">
+                    <span style="float: left; height: 55px;"> <h1>ToDo - Add new Todo</h1> </span>
+                    <span style="float: right"><a href="#index">Go Back</a></span>
+                </div>
+            </div>
+            <div data-role="main" class-"ui-content">
+                <input id="inputDescription" type="text" placeholder="What should you do?"/></br>
+                <div id="inputfields">
+                </div>
+                <button id="btnSubmit">Opslaan</button>
             </div>
         </div>
         <div data-role="page" id="settings">
             <div data-role="header">
                 <div style="clear: both; height: 55px; width: 100%;">
                     <span style="float: left; height: 55px;"> <h1>ToDo - Settings</h1> </span>
+                    <span style="float: right"><a href="#index">Go Back</a></span>
                 </div>
             </div>
             <div data-role="main" class-"ui-content">

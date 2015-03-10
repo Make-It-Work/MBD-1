@@ -34,6 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        buildAddPage();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -48,12 +49,92 @@ var app = {
     }
 };
 
+var db = window.openDatabase("todo", "1.0", "ToDo", 1000000);
+db.transaction(function(trans) {
+    trans.executeSql("CREATE TABLE IF NOT EXISTS Todo (description, user, time)");
+    getTodos(trans);
+});
+
+
+
 $( "#user-flip" ).bind( "change", function(event, ui) {
     window.localStorage.setItem("user", $(this).val());
     $("#user-setting").text(window.localStorage.getItem("user"));
+    db.transaction(function(trans) {
+        getTodos(trans);
+    })
 });
 $( "#time-flip" ).bind( "change", function(event, ui) {
     window.localStorage.setItem("time", $(this).val());
     $("#time-setting").text(window.localStorage.getItem("time"));
+    db.transaction(function(trans) {
+        getTodos(trans);
+    })
 });
+$("#btnSubmit").click(function() {
+    var description = $('#inputDescription').val();
+    var user = $('#inputUser').val();
+    var time = $('#inputTime').val();
 
+    addTodo(description, user, time);
+
+    $('#inputTime').val('');
+    $('#inputUser').val('');
+    $('#inputDescription').val('');
+});
+$("#addlink").click(function() {
+    buildAddPage();
+})
+
+function errorCB(err) {
+    alert("Error processing SQL: " + err.message);
+    return true;
+}
+
+function getTodos(trans) {
+    trans.executeSql('SELECT * FROM Todo', [], function(trans, results){
+        var htmlRows = '';
+        var len = results.rows.length;
+        for (var i=0; i<len; i++){
+            htmlRows += '<tr><td>'
+            if(window.localStorage.getItem("time") === "on") {
+                var time = results.rows.item(i).time;
+                console.log(time);
+                if (time === 'undefined') {
+                    time = '-';
+                }
+                htmlRows += time + '</td><td>'
+            }
+            htmlRows += results.rows.item(i).description + '</td>';
+            if(window.localStorage.getItem("user") === "on") {
+                var user = results.rows.item(i).user;
+                console.log(user);
+                if (user === "undefined") {
+                    user = '-';
+                }
+                htmlRows += '<td>' + user + '</td>';
+            }
+            htmlRows += '</tr>'
+        }
+
+        $('#results > tbody').html(htmlRows);
+    }, errorCB);
+}
+
+function addTodo(description, user, time) {
+    db.transaction(function(trans){ 
+        trans.executeSql('INSERT INTO Todo (description, user, time) VALUES (?,?,?)', [ description, user, time ]);
+        getTodos(trans);
+    }, errorCB);
+}
+
+function buildAddPage() {
+    htmlInputs ='';
+    if(window.localStorage.getItem("time") === "on") {
+        htmlInputs += '<input id="inputTime" type="text" placeholder="When should you do it?"/></br>';
+    }
+    if(window.localStorage.getItem("user") === "on") {
+        htmlInputs += '<input id="inputUser" type="text" placeholder="Who should do it?"/></br>';
+    }
+    $('#inputfields').html(htmlInputs);
+}
